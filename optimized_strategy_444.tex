@@ -27,8 +27,8 @@ The marginal notation is $P_{AB}(ab|xy)$ and $P_{BC}(bc|yz)$.
 The inequality used for this strategy is
 \begin{equation}
 \begin{aligned}
-S_{444}={}&2P_A(0|0)-P_B(0|0)+P_B(1|0)+P_B(2|1)\\
-&-P_{AB}(02|00)-2P_{AB}(02|01)\\
+S_{444}={}&P_A(0|0)-P_B(0|0)+P_B(1|0)+P_B(2|1)\\
+&+P_{AB}(00|00)+P_{AB}(01|00)-2P_{AB}(02|01)\\
 &+P_{AB}(00|10)-P_{AB}(01|10)\\
 &+P_{AB}(00|12)-P_{AB}(02|12)\\
 &+P_{BC}(00|00)-P_{BC}(10|01)\\
@@ -37,7 +37,7 @@ S_{444}={}&2P_A(0|0)-P_B(0|0)+P_B(1|0)+P_B(2|1)\\
 &+P_{BC}(10|21)+P_{BC}(20|21)\geq -1.
 \end{aligned}
 \end{equation}
-Its integer coefficient vector has $\ell_1$ norm $20$. We use
+This expression has 19 nonzero terms. Its integer coefficient vector has $\ell_1$ norm $20$. We use
 $S_{\rm norm}=S_{444}/20=c^Tp$, with $\|c\|_1=1$ and
 $\beta_{\rm HI}=-1/20=-0.05$, independently checked by the HI support LP.
 For the full-precision strategy below,
