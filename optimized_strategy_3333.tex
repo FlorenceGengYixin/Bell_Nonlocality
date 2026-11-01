@@ -1,0 +1,266 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\title{Optimized strategy for $[22][3333][22]$}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\section{Conventions and inequality}
+\label{app:3333_strategy}
+The local Hilbert space is $\mathbb C^2\otimes\mathbb C^3\otimes\mathbb C^2$,
+with tensor order $A,B,C$. Bob has four settings with 3 outcomes each.
+Alice and Charlie each have two binary settings. All setting and outcome
+indices start at zero. The state-vector basis is
+\[
+\mathcal E_{6a+2b+c}=|abc\rangle,\qquad a,c\in\{0,1\},\quad b\in\{0,\ldots,2\}.
+\]
+Probabilities follow the Born rule,
+\[
+P(abc|xyz)=\operatorname{Tr}\!\left[\rho
+ (A_{a|x}\otimes B_{b|y}\otimes C_{c|z})\right].
+\]
+The marginal notation is $P_{AB}(ab|xy)$ and $P_{BC}(bc|yz)$.
+The integer-scale inequality is
+\begin{equation}
+\begin{aligned}
+S_{3333}={}&-P_{A}(0|0)-P_{A}(0|1)\\
+&-P_{B}(0|0)+P_{B}(1|0)\\
+&-P_{B}(0|1)-P_{B}(1|1)\\
+&+P_{C}(0|0)+P_{AB}(00|00)\\
+&+P_{AB}(01|00)+2P_{AB}(00|01)\\
+&+2P_{AB}(01|01)+P_{AB}(00|10)\\
+&-P_{AB}(01|10)+2P_{AB}(00|12)\\
+&+P_{AB}(01|12)+P_{BC}(00|00)\\
+&-P_{BC}(10|01)-P_{BC}(00|10)\\
+&-P_{BC}(10|10)+P_{BC}(00|11)\\
+&+P_{BC}(10|11)-P_{BC}(00|20)\\
+&-P_{BC}(10|20)-P_{BC}(00|21)\geq -2.
+\end{aligned}
+\end{equation}
+The integer coefficient vector has $\ell_1$ norm $27$. We use
+$S_{\rm norm}=S_{3333}/27=c^Tp$, with $\|c\|_1=1$ and
+$\beta_{\rm HI}=-2/27$, independently checked by the HI support LP.
+For the full-precision strategy below,
+\[
+\begin{aligned}
+S_{\rm norm}&\simeq -0.074084085208426,\\
+S_{3333}&\simeq -2.000270300627504,\\
+\Delta_{L_1}=\beta_{\rm HI}-S_{\rm norm}&\simeq 1.001113435201\times10^{-5}.
+\end{aligned}
+\]
+The best retained candidate is the optimized three-setting qutrit strategy
+with an appended fourth POVM. The joint four-setting search did not improve
+on this incumbent; the appended POVM itself is not claimed to be optimized.
+The integer-scale inequality is the original Eq.(4).
+The inequality has no $y=3$ coefficient. The fourth POVM is a valid
+completion, but does not affect the reported violation. This strategy does
+not establish an advantage from adding a fourth setting. No global
+quantum-optimality claim is made.
+
+All displayed entries are rounded to ten decimal places. Full-precision
+arrays are supplied separately for numerical calculations.
+\section{State}
+The largest amplitude is chosen real and positive, fixing only a global
+phase. The density operator is $\rho=|\psi\rangle\langle\psi|$, with
+\[
+|\psi\rangle\simeq
+\begin{pmatrix}
+-0.0000014073-0.0000007997\,i \\
+-0.0002443770-0.0074886924\,i \\
+-0.0028541343+0.0092758003\,i \\
+-0.0000377050-0.0000053505\,i \\
+0.0000106514-0.0000091344\,i \\
+0.6769254967 \\
+-0.1144594950-0.2880958904\,i \\
+-0.0000060546+0.0000137239\,i \\
+-0.0000146568+0.0000027504\,i \\
+-0.5782596546-0.3329712415\,i \\
+-0.0153913543+0.0055087828\,i \\
+-0.0000775642-0.0000521570\,i
+\end{pmatrix}.
+\]
+\section{Alice and Charlie}
+\[
+A_{0|0}\simeq \begin{pmatrix}
+1.0000000000 & -0.0000035842+0.0000031803\,i \\
+-0.0000035842-0.0000031803\,i & 0.0000000000
+\end{pmatrix}.
+\]
+\[
+A_{1|0}=I_2-A_{0|0}.
+\]
+\[
+A_{0|1}\simeq \begin{pmatrix}
+0.4999908390 & 0.3739971167-0.3318526128\,i \\
+0.3739971167+0.3318526128\,i & 0.5000091610
+\end{pmatrix}.
+\]
+\[
+A_{1|1}=I_2-A_{0|1}.
+\]
+\[
+C_{0|0}\simeq \begin{pmatrix}
+0.9961719368 & 0.0296981745-0.0541426538\,i \\
+0.0296981745+0.0541426538\,i & 0.0038280628
+\end{pmatrix}.
+\]
+\[
+C_{1|0}=I_2-C_{0|0}.
+\]
+\[
+C_{0|1}\simeq \begin{pmatrix}
+0.0038333713 & 0.0297309209-0.0541733168\,i \\
+0.0297309209+0.0541733168\,i & 0.9961666292
+\end{pmatrix}.
+\]
+\[
+C_{1|1}=I_2-C_{0|1}.
+\]
+\section{Bob}
+To keep numerical matrices within the page width, define
+\[
+\mathcal H_3(d;z)=
+\begin{pmatrix}
+d_1&z_{12}&z_{13}\\
+\overline{z}_{12}&d_2&z_{23}\\
+\overline{z}_{13}&\overline{z}_{23}&d_3
+\end{pmatrix}.
+\]
+For each operator, the list specifies the diagonal and upper triangle;
+the lower triangle follows from Hermiticity. Matrix indices refer to
+Bob's ordered computational basis.
+\subsection*{Setting $y=0$}
+\[
+\begin{gathered}
+B_{0|0}\simeq\mathcal H_3(d;z),\\[3pt]
+\begin{aligned}
+d_1&=0.0482324390 \\
+d_2&=0.4998989967 \\
+d_3&=0.4518685643 \\
+z_{12}&=0.0260328389-0.1530804988\,i \\
+z_{13}&=-0.0051472594-0.1475406000\,i \\
+z_{23}&=0.4654873643-0.0959695551\,i
+\end{aligned}
+\end{gathered}
+\]
+\[
+\begin{gathered}
+B_{1|0}\simeq\mathcal H_3(d;z),\\[3pt]
+\begin{aligned}
+d_1&=0.0482310752 \\
+d_2&=0.5001010023 \\
+d_3&=0.4516679225 \\
+z_{12}&=-0.0260347754+0.1531097629\,i \\
+z_{13}&=-0.0051491942-0.1475056450\,i \\
+z_{23}&=-0.4654778303+0.0959685893\,i
+\end{aligned}
+\end{gathered}
+\]
+\[
+B_{2|0}=I_3-\sum_{b=0}^1B_{b|0}.
+\]
+\subsection*{Setting $y=1$}
+\[
+\begin{gathered}
+B_{0|1}\simeq\mathcal H_3(d;z),\\[3pt]
+\begin{aligned}
+d_1&=0.4998326457 \\
+d_2&=0.4999999987 \\
+d_3&=0.0001673556 \\
+z_{12}&=-0.0000000965-0.0000004603\,i \\
+z_{13}&=0.0003067287+0.0091408458\,i \\
+z_{23}&=0.0000253199+0.0000044295\,i
+\end{aligned}
+\end{gathered}
+\]
+\[
+\begin{gathered}
+B_{1|1}\simeq\mathcal H_3(d;z),\\[3pt]
+\begin{aligned}
+d_1&=0.4998326457 \\
+d_2&=0.4999999987 \\
+d_3&=0.0001673556 \\
+z_{12}&=-0.0000000965-0.0000004603\,i \\
+z_{13}&=0.0003067287+0.0091408458\,i \\
+z_{23}&=0.0000253199+0.0000044295\,i
+\end{aligned}
+\end{gathered}
+\]
+\[
+B_{2|1}=I_3-\sum_{b=0}^1B_{b|1}.
+\]
+\subsection*{Setting $y=2$}
+\[
+\begin{gathered}
+B_{0|2}\simeq\mathcal H_3(d;z),\\[3pt]
+\begin{aligned}
+d_1&=0.0000279473 \\
+d_2&=0.4998939137 \\
+d_3&=0.5000781390 \\
+z_{12}&=-0.0006150547+0.0036867827\,i \\
+z_{13}&=0.0001420593+0.0037357231\,i \\
+z_{23}&=0.4896877517-0.1009550586\,i
+\end{aligned}
+\end{gathered}
+\]
+\[
+\begin{gathered}
+B_{1|2}\simeq\mathcal H_3(d;z),\\[3pt]
+\begin{aligned}
+d_1&=0.9999439285 \\
+d_2&=0.0000000002 \\
+d_3&=0.0000560712 \\
+z_{12}&=0.0000008363+0.0000129122\,i \\
+z_{13}&=-0.0002874840-0.0074823349\,i \\
+z_{23}&=-0.0000000969-0.0000000025\,i
+\end{aligned}
+\end{gathered}
+\]
+\[
+B_{2|2}=I_3-\sum_{b=0}^1B_{b|2}.
+\]
+\subsection*{Setting $y=3$}
+\[
+\begin{gathered}
+B_{0|3}\simeq\mathcal H_3(d;z),\\[3pt]
+\begin{aligned}
+d_1&=0.4137575799 \\
+d_2&=0.0887829781 \\
+d_3&=0.4632258445 \\
+z_{12}&=0.0891568822-0.0348647291\,i \\
+z_{13}&=-0.2807640377-0.0479529928\,i \\
+z_{23}&=-0.0086451547+0.0163133607\,i
+\end{aligned}
+\end{gathered}
+\]
+\[
+\begin{gathered}
+B_{1|3}\simeq\mathcal H_3(d;z),\\[3pt]
+\begin{aligned}
+d_1&=0.1107625858 \\
+d_2&=0.3599885181 \\
+d_3&=0.1440337841 \\
+z_{12}&=0.0346291761-0.0599008420\,i \\
+z_{13}&=0.0245259575-0.0326915593\,i \\
+z_{23}&=0.1781936631+0.0186830274\,i
+\end{aligned}
+\end{gathered}
+\]
+\[
+B_{2|3}=I_3-\sum_{b=0}^1B_{b|3}.
+\]
+\section{Numerical checks}
+The full-precision maximum POVM residual is $1.110223024625\times10^{-15}$,
+and the minimum effect eigenvalue is $-3.261503470629\times10^{-18}$
+(zero within floating-point accuracy). Full Born probabilities were checked
+for non-negativity and normalization. The rounded state, renormalized, and
+the displayed effects with final outcomes reconstructed give
+\[
+\Delta_{L_1}^{\rm displayed}\simeq 1.001113847381\times10^{-5}.
+\]
+Rounding can create tiny negative effect eigenvalues; full-precision
+arrays are the reference for positivity checks.
+\end{document}
